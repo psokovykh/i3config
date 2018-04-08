@@ -9,5 +9,5 @@ if [[ "$IP" != "" ]]; then
 else
 	echo -e "down"
 	echo -e "down"
-	echo -e "#FF0000"
+	echo -e "#FF5722"
 fi

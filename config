@@ -167,15 +167,17 @@ exec --no-startup-id feh --bg-scale /home/dokel/Pictures/background.png
 #Let's assign some apps to their workspaces
 #assign [class="UXTerm"] $ws1 #Do not want it
 
-assign [window_role="browser"] $ws2
+assign [instance="Navigator" window_role="browser"] $ws2
 
-assign [window_role="Atom"] $ws3
+assign [class="Atom"] $ws3
 
 assign [class="TelegramDesktop"] $ws4
 
 assign [class="Pinta"] $ws5
 assign [class="Evince"] $ws5
 assign [class="Transmission-gtk"] $ws5
+assign [class="libreoffice"] $ws5
+assign [class="libreoffice-writer"] $ws5
 
 # Correct handling of floating windows
 for_window [window_role="pop-up"] floating enable
@@ -206,6 +208,7 @@ mode $mode_launcher {
     bindsym Return exec $browser; mode "default"
 	bindsym f exec $filebrowser; mode "default"
 	bindsym p exec pinta; mode "default"
+	bindsym o exec libreoffice; mode "default"
 
     bindsym Escape mode "default"
 	bindsym $mod+d mode "default"
@@ -242,3 +245,4 @@ exec $terminal
 exec $terminal
 exec $browser
 exec $editor
+exec telegram-desktop

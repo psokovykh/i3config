@@ -1,3 +1,7 @@
+#!/bin/bash
+# Copyright (C) 2014 Julien Bonjean <julien@bonjean.info>
+# Copyright (C) 2014 Alexander Keller <github@nycroth.com>
+
 # The second parameter overrides the mixer selection
 # For PulseAudio users, use "pulse"
 # For Jack/Jack2 users, use "jackplug"
