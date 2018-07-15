@@ -4,7 +4,8 @@ set $mod Mod4
 
 set $terminal uxterm -e fish
 set $browser firefox-developer-edition
-set $editor atom
+set $editor leafpad
+set $config "/home/dokel/.config/i3/config"
 set $filebrowser uxterm -name ranger -e ranger
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -135,21 +136,21 @@ smart_borders on
 
 
 bar {
-	    strip_workspace_numbers yes
-        status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
-		position top
-		height 28
-		colors  {
+	strip_workspace_numbers yes
+	status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
+	position top
+	height 28
+	colors  {
 	        background $black
 	        statusline $white
 	        focused_workspace $main_color $main_color $white
 	        active_workspace  $grey $black $white
 	        inactive_workspace $grey $black $white
-	        urgent_workspace $urgent $black $urgent
-		}
+	       	urgent_workspace $urgent $black $urgent
+	}
 
         # Do not allow applications to use the bar as icon tray
-		tray_output none
+	tray_output none
 }
 
 
@@ -170,6 +171,8 @@ exec --no-startup-id feh --bg-scale /home/dokel/Pictures/background.png
 assign [instance="Navigator" window_role="browser"] $ws2
 
 assign [class="Atom"] $ws3
+assign [class="Remarkable"] $ws3
+assign [class="Leafpad"] $ws3
 
 assign [class="TelegramDesktop"] $ws4
 
@@ -178,6 +181,8 @@ assign [class="Evince"] $ws5
 assign [class="Transmission-gtk"] $ws5
 assign [class="libreoffice"] $ws5
 assign [class="libreoffice-writer"] $ws5
+assign [class="Steam"] $ws5
+assign [class="com-yworks-A-yEd"] $ws5
 
 # Correct handling of floating windows
 for_window [window_role="pop-up"] floating enable
@@ -195,45 +200,49 @@ bindsym --release Print exec --no-startup-id scrot '%Y-%m-%d_%H:%M_$wx$h.png' -u
 # start a terminal
 bindsym $mod+Return exec $terminal
 
-set $mode_launcher "D-mode "
+set $mode_launcher "/"
 bindsym $mod+d mode $mode_launcher
 
-set $mode_work_launcher "Work-mode "
+set $mode_work_launcher "/"
 bindsym $mod+Tab mode $mode_work_launcher
 
-set $mode_talk_launcher "Talk-mode "
-bindsym $mod+s mode $mode_talk_launcher
+set $mode_game_launcher "/"
+bindsym $mod+g mode $mode_game_launcher
 
 mode $mode_launcher {
-    bindsym Return exec $browser; mode "default"
+	bindsym Return exec $browser; mode "default"
 	bindsym f exec $filebrowser; mode "default"
 	bindsym p exec pinta; mode "default"
 	bindsym o exec libreoffice; mode "default"
+	bindsym t exec telegram-desktop; mode "default"
+	bindsym c exec $editor $config; mode "default"
 
-    bindsym Escape mode "default"
+	bindsym Escape mode "default"
 	bindsym $mod+d mode "default"
 	bindsym $mod+Tab mode $mode_work_launcher
-	bindsym $mod+s mode $mode_talk_launcher
+	bindsym $mod+g mode $mode_game_launcher
 }
 
 
 mode $mode_work_launcher {
-    bindsym Return exec $editor; mode "default"
+	bindsym Return exec atom; mode "default"
+	bindsym e exec $editor; mode "default"
+	bindsym r exec remarkable; mode "default"
 
-    bindsym Escape mode "default"
+	bindsym Escape mode "default"
 	bindsym $mod+d mode $mode_launcher
 	bindsym $mod+Tab mode "default"
-	bindsym $mod+s mode $mode_talk_launcher
+	bindsym $mod+g mode $mode_game_launcher
 }
 
 
-mode $mode_talk_launcher {
-    bindsym Return exec telegram-desktop; mode "default"
+mode $mode_game_launcher {
+	bindsym Return exec steam; mode "default"
 
-    bindsym Escape mode "default"
+	bindsym Escape mode "default"
 	bindsym $mod+d mode $mode_launcher
 	bindsym $mod+Tab mode $mode_work_launcher
-	bindsym $mod+s mode "default"
+	bindsym $mod+g mode "default"
 }
 
 #Volume
@@ -244,5 +253,5 @@ bindsym $mod+KP_Subtract exec sh /home/dokel/.config/i3/otherscripts/volumedown.
 exec $terminal
 exec $terminal
 exec $browser
-exec $editor
+exec $atom
 exec telegram-desktop
