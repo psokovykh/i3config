@@ -13,7 +13,7 @@ floating_modifier $mod
 
 # kill focused window
 bindsym $mod+q kill
-
+bindsym --release $mod+Shift+Q exec xkill
 
 #colors setup
 set $main_color #608b7d
@@ -21,6 +21,8 @@ set $white #F5FFF5
 set $grey #555555
 set $black #212121
 set $urgent #64FFDA
+
+set $bar_separator " "
 
 # change focus
 bindsym $mod+h focus left
@@ -72,6 +74,12 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# Make the currently focused window a scratchpad
+bindsym $mod+plus scratchpad show
+
+# Show the first scratchpad window
+bindsym $mod+minus move scratchpad
+
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1:"
@@ -95,7 +103,7 @@ bindsym $mod+Shift+KP_4 move container to workspace $ws4
 bindsym $mod+Shift+KP_5 move container to workspace $ws5
 
 #Move to urgent window
-bindsym $mod+plus [urgent=latest] focus
+bindsym $mod+grave [urgent=latest] focus
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -135,11 +143,22 @@ bindsym $mod+r mode "resize"
 smart_borders on
 
 
+# window colours: border background text
+client.focused        $main_color $main_color $white $main_color $main_color
+client.focused_inactive    $grey $black $white $grey $grey
+client.unfocused    $grey $black $white $grey $grey
+client.urgent $urgent $black $urgent $urgent $urgent
+
 bar {
-	strip_workspace_numbers yes
+  strip_workspace_numbers yes
+	separator_symbol $bar_separator
 	status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
 	position top
 	height 28
+
+        # Do not allow applications to use the bar as icon tray
+	tray_output none
+
 	colors  {
 	        background $black
 	        statusline $white
@@ -148,18 +167,11 @@ bar {
 	        inactive_workspace $grey $black $white
 	       	urgent_workspace $urgent $black $urgent
 	}
-
-        # Do not allow applications to use the bar as icon tray
-	tray_output none
 }
 
 
 
 # window colours: border background text
-client.focused        $main_color $main_color $white $main_color $main_color
-client.focused_inactive    $grey $black $white $grey $grey
-client.unfocused    $grey $black $white $grey $grey
-client.urgent $urgent $black $urgent $urgent $urgent
 
 
 #Background
@@ -255,3 +267,5 @@ exec $terminal
 exec $browser
 exec $atom
 exec telegram-desktop
+exec transmission
+
