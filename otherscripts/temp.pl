@@ -25,8 +25,8 @@ use Getopt::Long;
 binmode(STDOUT, ":utf8");
 
 # default values
-my $t_warn = 60;
-my $t_crit = 90;
+my $t_warn = 65;
+my $t_crit = 85;
 my $chip = "";
 my $temperature = -9999;
 
