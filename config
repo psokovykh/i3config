@@ -1,4 +1,4 @@
-font pango:FontAwesome 10, Fira Sans 11
+font pango:Fira Sans, FontAwesome5Free, FontAwesome5Brands 11
 
 set $mod Mod4
 
