@@ -78,5 +78,6 @@ else
 	else
 		label=$(echo ": ")
 	fi
-	printf "%s%4s" "$label" "$val"
+	printf "%s%4s\n" "$label" "$val"
+	printf "%s%4s\n" "$label" "$val"
 fi

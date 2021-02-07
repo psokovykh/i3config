@@ -52,11 +52,11 @@ END {
 	printf("%3d%%\n", pct)
 	# color
 	if (pct > 85) {
-		print("#FF5722\n")
+		print("#FF5722")
 	} else if (pct > 60) {
-		print("#FF9800\n")
+		print("#FF9800")
 	} else {
-		print("#4CAF50\n")
+		print("#4CAF50")
 	}
 }
 ' /proc/meminfo
